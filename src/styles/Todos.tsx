@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 
     //Styles for TodoElement.tsx
     todoContainer: {
-        experimental_backgroundImage: 'linear-gradient(130deg, rgba(229, 37, 140, 0.7) 40%, #rgba(130, 60, 215, 0.3) 90%)',
+        experimental_backgroundImage: 'linear-gradient(100deg, rgba(229, 37, 140, 0.7) 40%, #rgba(130, 60, 215, 0.3) 90%)',
         width: '100%',
         minHeight: 60,
         marginVertical: 8,
