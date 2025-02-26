@@ -9,6 +9,7 @@ import {
 import styles from '../styles/Todos.tsx';
 import ImagePath from '../constants/ImagePath';
 
+//Params supposed to be recieved from parent component
 type TodoProps = PropsWithChildren<{
     title: string;
     id: string;
@@ -16,6 +17,7 @@ type TodoProps = PropsWithChildren<{
     deleteTodo: Function
 }>;
 
+//Reusable component to display each todo tile in a list
 function TodoElement({ title, id, editTodo, deleteTodo }: TodoProps): React.JSX.Element {
 
     return (
@@ -23,7 +25,6 @@ function TodoElement({ title, id, editTodo, deleteTodo }: TodoProps): React.JSX.
             <View style={styles.todoTitleContainer}>
                 <Text style={styles.todoTitle}>{title}</Text>
             </View>
-
             <View style={styles.todoActionsContainer}>
                 <Pressable onPress={() => editTodo(title, id)}>
                     <Image source={ImagePath.Edit} style={styles.editIcon} />

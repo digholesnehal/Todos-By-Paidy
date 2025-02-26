@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+    //Styles for TodoScreen.tsx
     container: {
         flex: 1
     },
@@ -9,7 +10,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 10,
         marginBottom: 20,
-        experimental_backgroundImage: 'linear-gradient(120deg, rgba(229, 37, 140, 0.8) 40%, #rgba(130, 60, 215, 0.6) 100%)'
+        experimental_backgroundImage: 'linear-gradient(120deg, rgba(229, 37, 140, 0.8) 40%, #rgba(130, 60, 215, 0.6) 90%)'
     },
     headerText: {
         opacity: 1,
@@ -25,10 +26,14 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(250, 250, 250, 0.2)"
     },
     scrollContainer: {
-        flex: 0.85
+        flex: 0.85,
+        paddingHorizontal: '5%',
+        paddingBottom: '5%'
     },
+
+    //Styles for TodoElement.tsx
     todoContainer: {
-        experimental_backgroundImage: 'linear-gradient(135deg, #E5258C 0%, #823CD7 100%)',
+        experimental_backgroundImage: 'linear-gradient(130deg, rgba(229, 37, 140, 0.7) 40%, #rgba(130, 60, 215, 0.3) 90%)',
         width: '100%',
         minHeight: 60,
         marginVertical: 8,
@@ -56,6 +61,8 @@ const styles = StyleSheet.create({
         height: 30,
         width: 30
     },
+
+    //Styles for TodoInput.tsx 
     todoInputContainer: {
         flex: 0.15
     },
