@@ -2,34 +2,33 @@ import React from 'react';
 import type { PropsWithChildren } from 'react';
 import {
     Text,
-    useColorScheme,
     View,
     Image,
     Pressable
 } from 'react-native';
-
 import styles from '../styles/TodoElement.tsx';
 import imagePath from '../constants/ImagePath';
 
 type TodoProps = PropsWithChildren<{
     title: string;
-    id: number;
+    id: string;
+    editTodo: Function;
+    deleteTodo: Function
 }>;
 
-function TodoElement({ title, id }: TodoProps): React.JSX.Element {
-    const isDarkMode = useColorScheme() === 'dark';
+function TodoElement({ title, id, editTodo, deleteTodo }: TodoProps): React.JSX.Element {
 
     return (
-        <View style={styles.todoContainer} key={title + id}>
+        <View style={styles.todoContainer}>
             <View style={styles.todoTitleContainer}>
-            <Text style={styles.todoTitle}>{title}</Text>
+                <Text style={styles.todoTitle}>{title}</Text>
             </View>
-            
+
             <View style={styles.todoActionsContainer}>
-                <Pressable onPress={() => console.log(id, "ID to be edited")}>
+                <Pressable onPress={() => editTodo(title, id)}>
                     <Image source={imagePath.Edit} style={styles.editIcon} />
                 </Pressable>
-                <Pressable onPress={() => console.log(id, "ID to be removed")}>
+                <Pressable onPress={() => deleteTodo(id)}>
                     <Image source={imagePath.Remove} style={styles.editIcon} />
                 </Pressable>
             </View>
