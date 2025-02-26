@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { apiReq } from '../utils/api';
 import * as URLS from '../config/urls';
-import styles from '../styles/TodoInput';
+import styles from '../styles/Todos';
 
 
 type TodoProps = PropsWithChildren<{

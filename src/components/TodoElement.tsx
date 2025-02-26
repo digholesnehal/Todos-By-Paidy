@@ -6,7 +6,7 @@ import {
     Image,
     Pressable
 } from 'react-native';
-import styles from '../styles/TodoElement.tsx';
+import styles from '../styles/Todos.tsx';
 import ImagePath from '../constants/ImagePath';
 
 type TodoProps = PropsWithChildren<{
@@ -17,7 +17,7 @@ type TodoProps = PropsWithChildren<{
 }>;
 
 function TodoElement({ title, id, editTodo, deleteTodo }: TodoProps): React.JSX.Element {
-    
+
     return (
         <View style={styles.todoContainer}>
             <View style={styles.todoTitleContainer}>
