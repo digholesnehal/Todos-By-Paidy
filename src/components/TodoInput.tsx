@@ -6,7 +6,8 @@ import {
     KeyboardAvoidingView,
     Image,
     Pressable,
-    Text
+    Text,
+    Alert
 } from 'react-native';
 import { apiReq } from '../utils/api';
 import * as URLS from '../config/urls';
@@ -33,7 +34,6 @@ function TodoInput({ title = '', id, refInput, fetchTodoList }: TodoProps): Reac
     }
 
     const updateTodo = (todoId: string) => {
-
         // endPoint: string, method?: string | undefined, body?: object | undefined, headers?: {"Content-Type": "application/json";} | undefined
         apiReq(`${URLS.UPDATE_TODO}${todoId}`, 'PUT', {
             title: todoTitle,
@@ -53,7 +53,7 @@ function TodoInput({ title = '', id, refInput, fetchTodoList }: TodoProps): Reac
                 }
             })
             .catch(err => {
-                console.log(err || 'Something went wrong!');
+                Alert.alert(err || 'Something went wrong!');
             });
     }
 
@@ -78,7 +78,7 @@ function TodoInput({ title = '', id, refInput, fetchTodoList }: TodoProps): Reac
                 }
             })
             .catch(err => {
-                console.log(err || 'Something went wrong!');
+                Alert.alert(err || 'Something went wrong!');
             });
     }
 

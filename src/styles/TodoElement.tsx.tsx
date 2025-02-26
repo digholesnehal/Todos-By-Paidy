@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     todoContainer: {
-        backgroundColor: 'rgba(255, 0, 255, 0.2)',
+        experimental_backgroundImage: 'linear-gradient(135deg, #E5258C 0%, #823CD7 100%)',
         width: '100%',
         minHeight: 60,
         marginVertical: 8,

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import {
     Alert,
+    Image,
     ScrollView,
     Text,
     TextInput,
@@ -12,6 +13,7 @@ import TodoInput from '../components/TodoInput';
 
 import { apiReq } from '../utils/api';
 import * as URLS from '../config/urls';
+import ImagePath from '../constants/ImagePath';
 
 
 function TodosScreen(): React.JSX.Element {
@@ -43,12 +45,11 @@ function TodosScreen(): React.JSX.Element {
     const deleteTodo = (id: string) => {
         // endPoint: string, method?: string | undefined, body?: object | undefined, headers?: {"Content-Type": "application/json";} | undefined
         apiReq(`${URLS.DELETE_TODO}${id}`, 'DELETE').then(res => {
-            console.log("DELETE RES: ", res)
             if (res.message === "Todo deleted successfully.") {
                 fetchTodoList();
             }
             else {
-                throw("Something went wrong! Please, Try again later")
+                throw ("Something went wrong! Please, Try again later")
             }
         }).catch(err => Alert.alert(err || "Something Went Wrong"))
     }
@@ -57,8 +58,13 @@ function TodosScreen(): React.JSX.Element {
 
     return (
         <View style={{ flex: 1 }}>
-            <View style={{ padding: 20 }}>
-                <Text style={{ fontSize: 22, fontWeight: '900', color: '#00008B' }}> TODO:  </Text>
+            <View style={{ flexDirection: 'row', paddingHorizontal: 20, paddingVertical:10, marginBottom: 20 , experimental_backgroundImage: 'linear-gradient(120deg, rgba(229, 37, 140, 0.8) 40%, #rgba(130, 60, 215, 0.6) 100%)'}}>
+                <Text style={{ opacity:1,fontSize: 22, fontWeight: '900', color: '#FFF' }}> TODOs by</Text>
+                <Image source={ImagePath.Horizontal_Logo} style={{
+                    height: 35,
+                    width: 100,
+                    marginLeft: 15
+                }} />
             </View>
             <ScrollView
                 style={{ flex: 0.85 }}>

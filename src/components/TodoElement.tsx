@@ -7,7 +7,7 @@ import {
     Pressable
 } from 'react-native';
 import styles from '../styles/TodoElement.tsx';
-import imagePath from '../constants/ImagePath';
+import ImagePath from '../constants/ImagePath';
 
 type TodoProps = PropsWithChildren<{
     title: string;
@@ -17,7 +17,7 @@ type TodoProps = PropsWithChildren<{
 }>;
 
 function TodoElement({ title, id, editTodo, deleteTodo }: TodoProps): React.JSX.Element {
-
+    
     return (
         <View style={styles.todoContainer}>
             <View style={styles.todoTitleContainer}>
@@ -26,10 +26,10 @@ function TodoElement({ title, id, editTodo, deleteTodo }: TodoProps): React.JSX.
 
             <View style={styles.todoActionsContainer}>
                 <Pressable onPress={() => editTodo(title, id)}>
-                    <Image source={imagePath.Edit} style={styles.editIcon} />
+                    <Image source={ImagePath.Edit} style={styles.editIcon} />
                 </Pressable>
                 <Pressable onPress={() => deleteTodo(id)}>
-                    <Image source={imagePath.Remove} style={styles.editIcon} />
+                    <Image source={ImagePath.Remove} style={styles.editIcon} />
                 </Pressable>
             </View>
         </View>
