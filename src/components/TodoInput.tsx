@@ -98,6 +98,7 @@ function TodoInput({ title = '', id, refInput, fetchTodoList }: TodoProps): Reac
                 defaultValue={todoTitle}
                 value={todoTitle}
                 style={styles.textInput}
+                testID="todo-input"
             />
             <Pressable style={styles.button} onPress={() => id ? updateTodo(id) : addNewTodo()}>
                 <Text style={styles.buttonText}>{id ? 'Update' : 'ADD'}</Text>

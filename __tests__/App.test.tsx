@@ -1,13 +1,21 @@
-/**
- * @format
- */
-
 import React from 'react';
-import ReactTestRenderer from 'react-test-renderer';
+import { render } from '@testing-library/react-native';
 import App from '../App';
+import TodosScreen from '../src/screens/TodosScreen';
 
-test('renders correctly', async () => {
-  await ReactTestRenderer.act(() => {
-    ReactTestRenderer.create(<App />);
+jest.mock('../src/screens/TodosScreen', () => jest.fn(() => <></>));
+jest.mock('../src/screens/AuthScreen', () => jest.fn(() => <></>));
+
+describe('App Component', () => {
+  it('renders TodosScreen by default', () => {
+    render(<App />);
+    expect(TodosScreen).toHaveBeenCalled();
   });
+
+  // Uncomment below test if screen switching is implemented
+  // it('renders AuthScreen when condition is met', () => {
+  //   jest.mock('../src/screens/TodosScreen', () => jest.fn(() => <></>));
+  //   render(<App />);
+  //   expect(AuthScreen).toHaveBeenCalled();
+  // });
 });

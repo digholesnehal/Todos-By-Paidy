@@ -26,11 +26,11 @@ function TodoElement({ title, id, editTodo, deleteTodo }: TodoProps): React.JSX.
                 <Text style={styles.todoTitle}>{title}</Text>
             </View>
             <View style={styles.todoActionsContainer}>
-                <Pressable onPress={() => editTodo(title, id)}>
-                    <Image source={ImagePath.Edit} style={styles.editIcon} />
+                <Pressable onPress={() => editTodo(title, id)} testID="edit-button">
+                    <Image source={ImagePath.Edit} style={styles.editIcon} testID="edit-icon" />
                 </Pressable>
-                <Pressable onPress={() => deleteTodo(id)}>
-                    <Image source={ImagePath.Remove} style={styles.editIcon} />
+                <Pressable onPress={() => deleteTodo(id)} testID="delete-button">
+                    <Image source={ImagePath.Remove} style={styles.editIcon} testID="delete-icon" />
                 </Pressable>
             </View>
         </View>
