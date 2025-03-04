@@ -1,6 +1,12 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+    
+    //Styles for App.tsx
+    appContainer: {
+        height: '100%'
+    },
+
     //Styles for TodoScreen.tsx
     container: {
         flex: 1

@@ -25,6 +25,13 @@ describe('TodosScreen Component', () => {
     });
   });
 
+
+  it('renders loading indicator on initial fetch', async () => {
+    (apiReq as jest.Mock).mockImplementation(() => new Promise((resolve) => setTimeout(() => resolve(mockTodos), 50)));
+    const { getByTestId } = render(<TodosScreen />);
+    await waitFor(() => expect(getByTestId('activityIndicator')).toBeTruthy());
+  });
+
   it('renders todos when API returns data', async () => {
     const { getByText } = render(<TodosScreen />);
 
@@ -63,7 +70,7 @@ describe('TodosScreen Component', () => {
   it('adds a new todo when add button is pressed', async () => {
     const { getByTestId, getByText } = render(<TodosScreen />);
 
-    const input = getByTestId('todo-input'); // Replaced `getByPlaceholderText`
+    const input = getByTestId('todo-input');
     fireEvent.changeText(input, 'New Todo');
 
     const addButton = getByText('ADD');

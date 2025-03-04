@@ -1,7 +1,7 @@
 import React, { createRef } from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
 import { TextInput, Alert } from 'react-native';
-import TodoInput from '../src/components/TodoInput'; // Adjust path if needed
+import TodoInput from '../src/components/TodoInput';
 import { apiReq } from '../src/utils/api';
 import * as URLS from '../src/config/urls';
 
@@ -15,7 +15,7 @@ jest.spyOn(Alert, 'alert').mockImplementation(() => {});
 
 describe('TodoInput Component', () => {
   const mockFetchTodoList = jest.fn();
-  const mockRef = createRef<TextInput>(); // ✅ Correctly typed RefObject
+  const mockRef = createRef<TextInput>();
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -42,7 +42,7 @@ describe('TodoInput Component', () => {
   });
 
   it('calls addNewTodo when add button is pressed', async () => {
-    apiReq.mockResolvedValueOnce({ message: 'Todo added successfully.' });
+    (apiReq as jest.Mock).mockResolvedValueOnce({ message: 'Todo added successfully.' });
 
     const { getByTestId, getByText } = render(
       <TodoInput refInput={mockRef} fetchTodoList={mockFetchTodoList} />
@@ -66,7 +66,7 @@ describe('TodoInput Component', () => {
   });
 
   it('calls updateTodo when update button is pressed', async () => {
-    apiReq.mockResolvedValueOnce({ message: 'Todo updated successfully.' });
+    (apiReq as jest.Mock).mockResolvedValueOnce({ message: 'Todo updated successfully.' });
 
     const { getByTestId, getByText } = render(
       <TodoInput refInput={mockRef} fetchTodoList={mockFetchTodoList} title="Existing Todo" id="123" />
@@ -90,7 +90,7 @@ describe('TodoInput Component', () => {
   });
 
   it('shows an alert when the API call fails', async () => {
-    apiReq.mockRejectedValueOnce('Something went wrong!');
+    (apiReq as jest.Mock).mockRejectedValueOnce('Something went wrong!');
 
     const { getByText } = render(
       <TodoInput refInput={mockRef} fetchTodoList={mockFetchTodoList} />

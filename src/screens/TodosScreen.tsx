@@ -71,7 +71,7 @@ function TodosScreen(): React.JSX.Element {
     return (
         <View style={styles.container}>
             {loading &&
-            <ActivityIndicator size="large" color="#0000ff" style={styles.loading}/>}
+            <ActivityIndicator testID='activityIndicator' size="large" color="#0000ff" style={styles.loading}/>}
             <View style={styles.header}>
                 <Text style={styles.headerText}> TODOs by</Text>
                 <Image source={ImagePath.Horizontal_Logo} style={styles.headerLogo} />
