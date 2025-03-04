@@ -3,15 +3,15 @@ import {
   View
 } from 'react-native';
 import AuthScreen from './src/screens/AuthScreen';
-import TodosScreen from './src/screens/TodosScreen';
 
 
 function App(): React.JSX.Element {
 
+  //Shows first screen as a authentication screen
+
   return (
     <View style={{ height: '100%' }}>
-      {/* <AuthScreen /> */}
-      <TodosScreen />
+      <AuthScreen />
     </View>
   );
 }

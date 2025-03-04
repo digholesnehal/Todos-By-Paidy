@@ -96,6 +96,15 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 18,
         fontWeight: 'bold'
+    },
+
+    //Style for activity indicator
+    loading: {
+        ...StyleSheet.absoluteFillObject, // Covers the whole screen
+        backgroundColor: 'rgba(200, 200, 200, 0.2)', // Semi-transparent black
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 1000, // Ensures overlay is always on top
     }
 });
 

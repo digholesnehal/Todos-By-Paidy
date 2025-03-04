@@ -6,6 +6,7 @@ import {
     Text,
     TextInput,
     View,
+    ActivityIndicator
 } from 'react-native';
 
 import TodoElement from '../components/TodoElement';
@@ -20,7 +21,8 @@ import ImagePath from '../constants/ImagePath';
 
 function TodosScreen(): React.JSX.Element {
     const [todoList, setTodoList] = useState([]);
-    const [selectedTodo, setSelectedTodo] = useState({ title: '', id: '' })
+    const [selectedTodo, setSelectedTodo] = useState({ title: '', id: '' });
+    const [loading, setLoading] = useState(true);
 
     //Arefernce for input box is created, to handle focus and blur events from outside methods
     const childRefInput = useRef<TextInput>(null);
@@ -36,10 +38,11 @@ function TodosScreen(): React.JSX.Element {
     }, [todoList])
 
     const fetchTodoList = () => {
+        setLoading(true);
         // endPoint: string, method?: string | undefined, body?: object | undefined, headers?: object | undefined
         apiReq(URLS.GET_ALL_TODOS, 'GET').then(res => {
-            console.log("RESPONSE: ", res)
             setTodoList(res || []);
+            setLoading(false);
         }).catch(err => Alert.alert(err || "Something Went Wrong"))
     }
 
@@ -50,9 +53,11 @@ function TodosScreen(): React.JSX.Element {
     }
 
     const deleteTodo = (id: string) => {
+        setLoading(true);
         //To delete an existing todo from a list, fetch API is called using DELETE method
         // endPoint: string, method?: string | undefined, body?: object | undefined, headers?: object | undefined
         apiReq(`${URLS.DELETE_TODO}${id}`, 'DELETE').then(res => {
+            setLoading(false);
             if (res.message === "Todo deleted successfully.") {
                 //In case of a success response, list need to be refetched to show newly reduced list
                 fetchTodoList();
@@ -65,13 +70,15 @@ function TodosScreen(): React.JSX.Element {
 
     return (
         <View style={styles.container}>
+            {loading &&
+            <ActivityIndicator size="large" color="#0000ff" style={styles.loading}/>}
             <View style={styles.header}>
                 <Text style={styles.headerText}> TODOs by</Text>
                 <Image source={ImagePath.Horizontal_Logo} style={styles.headerLogo} />
             </View>
             <ScrollView style={styles.scrollContainer}>
-                    {todoList.length ? todoList.map(({ title, _id }) => <TodoElement title={title} id={_id} key={_id} editTodo={updateTodo} deleteTodo={deleteTodo} />
-                    ) : null}
+                {todoList.length ? todoList.map(({ title, _id }) => <TodoElement title={title} id={_id} key={_id} editTodo={updateTodo} deleteTodo={deleteTodo} />
+                ) : null}
             </ScrollView>
             <View style={styles.todoInputContainer}>
                 <TodoInput refInput={childRefInput} {...selectedTodo} fetchTodoList={fetchTodoList} />

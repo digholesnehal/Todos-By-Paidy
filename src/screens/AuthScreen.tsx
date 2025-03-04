@@ -1,65 +1,57 @@
-import React, { useState, useEffect } from 'react';
-import type { PropsWithChildren } from 'react';
+import React, { useEffect, useState } from "react";
 import {
-    ScrollView,
-    StatusBar,
-    Text,
-    Pressable,
-    View
-} from 'react-native';
-import styles from '../styles/Authentication.tsx';
+    View,
+    ActivityIndicator,
+    Button,
+    Alert
+} from "react-native";
+import ReactNativeBiometrics from "react-native-biometrics";
+import TodosScreen from "./TodosScreen";
 
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-// import * as LocalAuthentication from 'expo-local-authentication';
-
-
-
-function AuthScreen(): React.JSX.Element {
-    const [isBiometricSupported, setIsBiometricSupported] = useState(false);
-    const [fingerprint, setFingerprint] = useState(false);
+const AuthScreen = () => {
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // (async () => {
-        //     const compatible = false;
-        //     setIsBiometricSupported(compatible);
-        //     const enroll = await LocalAuthentication.isEnrolledAsync();
-        //     if (enroll) {
-        //         setFingerprint(true);
-        //     }
-        // })();
-    }, []);
+        if (!isAuthenticated) {
+            //On first render of the app or if not authenticated, this will be called
+            handleAuthentication();
+        }
+    }, [isAuthenticated]);
 
-    const handle = async () => {
-        // try {
-        //     const biometricAuth = await LocalAuthentication.authenticateAsync({
-        //         promptMessage: "Login with Biometrics",
-        //         disableDeviceFallback: true,
-        //         cancelLabel: "Cancel",
-        //     });
-        //     if (biometricAuth.success) {
-        //         // navigation.replace("Home");
-        //         console.log("BIOMETRIC SUCCESS")
-        //     }
-        // } catch (error) {
-        //     console.log(error);
-        // }
+    const handleAuthentication = () => {
+        const rnBiometrics = new ReactNativeBiometrics({ allowDeviceCredentials: true });
+
+        //Shows default propt which asks to input device passcode
+        rnBiometrics.simplePrompt({ promptMessage: "Authenticate with your passcode" })
+            .then(result => {
+                if (result.success) {
+                    setTimeout(() => {
+                        setIsAuthenticated(true);
+                        setLoading(false);
+                    }, 1000); // Small delay to smooth transition
+                } else {
+                    Alert.alert("Authentication Failed", "Incorrect passcode. Try again.");
+                }
+            })
+            .catch(() => {
+                setLoading(false);
+                Alert.alert("Error", "Authentication error occurred.");
+            });
     };
 
-
-
     return (
-        <View style={{ height: '100%' }}>
-            {isBiometricSupported && fingerprint ? (
-                <Pressable style={styles.button} onPress={() => handle()}>
-                    <Text style={styles.buttonText}>GO TO HOME</Text>
-                </Pressable>) : (
-                <View>
-                    <Text>fingerprint not supported/ allocated</Text>
-                </View>
-            )}
-
-        </View>
+        isAuthenticated ? (
+            <TodosScreen />
+        ) : (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: 20 }}>
+                {loading && <ActivityIndicator size="large" color="#0000ff" />}
+                {!loading && (
+                    <Button title="Authenticate with Device Passcode" onPress={handleAuthentication} />
+                )}
+            </View>
+        )
     );
-}
+};
 
 export default AuthScreen;
