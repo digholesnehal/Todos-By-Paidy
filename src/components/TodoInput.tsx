@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import type { PropsWithChildren } from 'react';
 import {
     TextInput,
-    KeyboardAvoidingView,
     Pressable,
     Text,
-    Alert
+    Alert,
+    View
 } from 'react-native';
 import { apiReq } from '../utils/api';
 import * as URLS from '../config/urls';
@@ -87,7 +87,7 @@ function TodoInput({ title = '', id, refInput, fetchTodoList }: TodoProps): Reac
     }
 
     return (
-        <KeyboardAvoidingView style={styles.inputContainer}>
+        <View style={styles.inputContainer}>
             <TextInput
                 ref={refInput}
                 editable
@@ -103,7 +103,7 @@ function TodoInput({ title = '', id, refInput, fetchTodoList }: TodoProps): Reac
             <Pressable style={styles.button} onPress={() => id ? updateTodo(id) : addNewTodo()}>
                 <Text style={styles.buttonText}>{id ? 'Update' : 'ADD'}</Text>
             </Pressable>
-        </KeyboardAvoidingView>
+        </View>
     );
 }
 

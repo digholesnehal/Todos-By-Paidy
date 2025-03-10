@@ -6,7 +6,9 @@ import {
     Text,
     TextInput,
     View,
-    ActivityIndicator
+    ActivityIndicator,
+    KeyboardAvoidingView,
+    Platform
 } from 'react-native';
 
 import TodoElement from '../components/TodoElement';
@@ -69,9 +71,11 @@ function TodosScreen(): React.JSX.Element {
     }
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={styles.container} >
             {loading &&
-            <ActivityIndicator testID='activityIndicator' size="large" color="#0000ff" style={styles.loading}/>}
+                <ActivityIndicator testID='activityIndicator' size="large" color="#0000ff" style={styles.loading} />}
             <View style={styles.header}>
                 <Text style={styles.headerText}> TODOs by</Text>
                 <Image source={ImagePath.Horizontal_Logo} style={styles.headerLogo} />
@@ -83,7 +87,7 @@ function TodosScreen(): React.JSX.Element {
             <View style={styles.todoInputContainer}>
                 <TodoInput refInput={childRefInput} {...selectedTodo} fetchTodoList={fetchTodoList} />
             </View>
-        </View>
+        </KeyboardAvoidingView>
     );
 }
 
